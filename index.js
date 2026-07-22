@@ -37,6 +37,33 @@ bot.onText(/\/status/, (msg) => {
   bot.sendMessage(msg.chat.id, `Статус: ${isAway ? "🌙 офлайн (авто-ответ включён)" : "✅ на связи"}\nТекст: ${awayMessage}`);
 });
 
+bot.onText(/зио котча/i, async (msg) => {
+  const chatId = msg.chat.id;
+
+  const frames = [
+    "🍑",
+    "🍑🍑   🍑🍑",
+    "🍑🍑🍑 🍑🍑🍑",
+    "🍑🍑🍑🍑🍑🍑🍑",
+    " 🍑🍑🍑🍑🍑 ",
+    "  🍑🍑🍑  ",
+    "   🍑   ",
+    "🍑🍑   🍑🍑\n🍑🍑🍑🍑🍑🍑🍑\n 🍑🍑🍑🍑🍑 \n  🍑🍑🍑  \n   🍑   \n\nЗИО КОТЧА ❤️"
+  ];
+
+  const sent = await bot.sendMessage(chatId, frames[0]);
+
+  for (let i = 1; i < frames.length; i++) {
+    await new Promise(r => setTimeout(r, 400));
+    try {
+      await bot.editMessageText(frames[i], {
+        chat_id: chatId,
+        message_id: sent.message_id
+      });
+    } catch (e) {}
+  }
+});
+
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text || "";
@@ -53,4 +80,3 @@ bot.on('message', (msg) => {
 });
 
 console.log('Бот запущен');
-
