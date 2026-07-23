@@ -181,7 +181,15 @@ bot.onText(/\/game/, (msg) => {
   });
 });
 
-bot.on('callback_query', (query) => {
+  
+
+const compliments = [
+  "Ты сегодня особенно классно выглядишь! ✨",
+  "У тебя отличное чувство юмора! 😄",
+  "Ты явно умнее большинства людей в этом чате 🧠",
+  "С тобой приятно общаться! 💬",
+  "Ты сегодня в отличной форме! 💪"
+];bot.on('callback_query', async (query) => {
   const choices = ["rock", "scissors", "paper"];
   const names = { rock: "🪨 Камень", scissors: "✂️ Ножницы", paper: "📄 Бумага" };
   const userChoice = query.data;
@@ -201,16 +209,28 @@ bot.on('callback_query', (query) => {
   }
 
   bot.answerCallbackQuery(query.id);
-  bot.sendMessage(query.message.chat.id, `Ты: ${names[userChoice]}\nБот: ${names[botChoice]}\n\n${result}`);
+
+  const chatId = query.message.chat.id;
+
+  const sent = await bot.sendMessage(chatId, "Камень...");
+  await new Promise(r => setTimeout(r, 600));
+  try {
+    await bot.editMessageText("Камень... Ножницы...", { chat_id: chatId, message_id: sent.message_id });
+  } catch (e) {}
+  await new Promise(r => setTimeout(r, 600));
+  try {
+    await bot.editMessageText("Камень... Ножницы... Бумага!", { chat_id: chatId, message_id: sent.message_id });
+  } catch (e) {}
+  await new Promise(r => setTimeout(r, 700));
+
+  try {
+    await bot.editMessageText(
+      `Ты: ${names[userChoice]}\nБот: ${names[botChoice]}\n\n${result}`,
+      { chat_id: chatId, message_id: sent.message_id }
+    );
+  } catch (e) {}
 });
 
-const compliments = [
-  "Ты сегодня особенно классно выглядишь! ✨",
-  "У тебя отличное чувство юмора! 😄",
-  "Ты явно умнее большинства людей в этом чате 🧠",
-  "С тобой приятно общаться! 💬",
-  "Ты сегодня в отличной форме! 💪"
-];
 
 const roasts = [
   "Ты как Wi-Fi без пароля — все подключаются, но никто не остаётся надолго 📶",
