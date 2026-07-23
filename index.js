@@ -181,19 +181,12 @@ bot.onText(/\/game/, (msg) => {
   });
 });
 
-  
-
-const compliments = [
-  "Ты сегодня особенно классно выглядишь! ✨",
-  "У тебя отличное чувство юмора! 😄",
-  "Ты явно умнее большинства людей в этом чате 🧠",
-  "С тобой приятно общаться! 💬",
-  "Ты сегодня в отличной форме! 💪"
-];bot.on('callback_query', async (query) => {
+bot.on('callback_query', async (query) => {
   const choices = ["rock", "scissors", "paper"];
   const names = { rock: "🪨 Камень", scissors: "✂️ Ножницы", paper: "📄 Бумага" };
   const userChoice = query.data;
   const botChoice = choices[Math.floor(Math.random() * 3)];
+  const playerName = query.from.first_name;
 
   let result;
   if (userChoice === botChoice) {
@@ -203,7 +196,7 @@ const compliments = [
     (userChoice === "scissors" && botChoice === "paper") ||
     (userChoice === "paper" && botChoice === "rock")
   ) {
-    result = "Ты выиграл! 🎉";
+    result = `${playerName} выиграл! 🎉`;
   } else {
     result = "Бот выиграл! 🤖";
   }
@@ -225,12 +218,19 @@ const compliments = [
 
   try {
     await bot.editMessageText(
-      `Ты: ${names[userChoice]}\nБот: ${names[botChoice]}\n\n${result}`,
+      `${playerName}: ${names[userChoice]}\nБот: ${names[botChoice]}\n\n${result}`,
       { chat_id: chatId, message_id: sent.message_id }
     );
   } catch (e) {}
 });
 
+const compliments = [
+  "Ты сегодня особенно классно выглядишь! ✨",
+  "У тебя отличное чувство юмора! 😄",
+  "Ты явно умнее большинства людей в этом чате 🧠",
+  "С тобой приятно общаться! 💬",
+  "Ты сегодня в отличной форме! 💪"
+];
 
 const roasts = [
   "Ты как Wi-Fi без пароля — все подключаются, но никто не остаётся надолго 📶",
@@ -281,4 +281,3 @@ bot.on('message', (msg) => {
 });
 
 console.log('Бот запущен');
-
