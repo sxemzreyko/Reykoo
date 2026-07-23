@@ -42,12 +42,12 @@ bot.onText(/зио котча/i, async (msg) => {
 
   const heart =
 "```\n" +
-"🍑🍑   🍑🍑\n" +
-"🍑🍑🍑🍑🍑🍑🍑\n" +
-"🍑🍑🍑🍑🍑🍑🍑\n" +
-" 🍑🍑🍑🍑🍑 \n" +
-"  🍑🍑🍑  \n" +
-"   🍑   \n" +
+"  🍑🍑    🍑🍑  \n" +
+"🍑🍑🍑🍑🍑🍑🍑🍑\n" +
+"🍑🍑🍑🍑🍑🍑🍑🍑\n" +
+"  🍑🍑🍑🍑🍑🍑  \n" +
+"    🍑🍑🍑🍑    \n" +
+"      🍑🍑      \n" +
 "\nЗИО КОТЧА ❤️\n" +
 "```";
 
@@ -83,6 +83,41 @@ bot.onText(/fuck you/i, async (msg) => {
 
   for (let i = 1; i < frames.length; i++) {
     await new Promise(r => setTimeout(r, 400));
+    try {
+      await bot.editMessageText(frames[i], {
+        chat_id: chatId,
+        message_id: sent.message_id,
+        parse_mode: "Markdown"
+      });
+    } catch (e) {}
+  }
+});
+
+bot.onText(/любовь/i, async (msg) => {
+  const chatId = msg.chat.id;
+
+  const art = [
+"  ****     ****  ",
+" ****** *  ****** ",
+"************ ",
+" *********** ",
+"  ********  ",
+"   ******   ",
+"    ****    ",
+"     **     "
+  ];
+
+  const frames = [];
+  for (let i = 1; i <= art.length; i++) {
+    const partial = art.slice(0, i).join("\n");
+    frames.push("```\n" + partial + "\n```");
+  }
+  frames.push("```\n" + art.join("\n") + "\n\nЛЮБОВЬ ❤️\n```");
+
+  const sent = await bot.sendMessage(chatId, frames[0], { parse_mode: "Markdown" });
+
+  for (let i = 1; i < frames.length; i++) {
+    await new Promise(r => setTimeout(r, 350));
     try {
       await bot.editMessageText(frames[i], {
         chat_id: chatId,
