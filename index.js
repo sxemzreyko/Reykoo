@@ -1,12 +1,4 @@
-const TelegramBot = require('node-telegram-bot-api');bot.setMyCommands([ { command: 'game', description: 'Играть в Камень-Ножницы-Бумага' },
-  { command: 'compliment', description: 'Получить комплимент' },
-  { command: 'roast', description: 'Получить подкол' },
-  { command: 'fortune', description: 'Гадание на имени (напиши имя после команды)' },
-  { command: 'help', description: 'Список всех команд и слов-триггеров' },
-  { command: 'status', description: 'Статус бота (только для владельца)' },
-  { command: 'online', description: 'Включить режим на связи (только для владельца)' },
-  { command: 'offline', description: 'Включить авто-ответ (только для владельца)' }
-]);
+const TelegramBot = require('node-telegram-bot-api');
 
 bot.onText(/\/help/, (msg) => {
   bot.sendMessage(msg.chat.id,
