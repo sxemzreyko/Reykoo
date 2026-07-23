@@ -1,24 +1,43 @@
-const TelegramBot = require('node-telegram-bot-api');
+const TelegramBot = require("node-telegram-bot-api");
 
-bot.onText(/\/help/, (msg) => {
-  bot.sendMessage(msg.chat.id,
-`📋 Что умеет этот бот:
+const TOKEN = process.env.BOT_TOKEN;
+const OWNER_ID = process.env.OWNER_ID;
+
+if (!TOKEN) {
+  throw new Error("Не указан BOT_TOKEN в переменных окружения");
+}
+
+if (!OWNER_ID) {
+  throw new Error("Не указан OWNER_ID в переменных окружения");
+}
+
+const bot = new TelegramBot(TOKEN, {
+  polling: true,
+});
+
+bot.onText(/^\/help(?:@\w+)?$/, async (msg) => {
+  await bot.sendMessage(
+    msg.chat.id,
+    `📋 Что умеет этот бот:
 
 🎮 /game — Камень-Ножницы-Бумага
 💬 /compliment — случайный комплимент
 😏 /roast — случайный подкол
 🔮 /fortune Имя — гадание на имени
 
-✨ Слова-триггеры (просто напиши):
+✨ Слова-триггеры — просто напиши:
 — "зио котча"
 — "любовь"
 — "спокойной ночи"
 — "fuck you"
 
 👑 Только для владельца:
-/online, /offline, /status, /setmess
-
- 
+/online — включить режим «на связи»
+/offline — включить автоответ
+/status — посмотреть статус
+/setmessage текст — изменить автоответ`
+  );
+});
 
 const TOKEN = process.env.BOT_TOKEN;
 const OWNER_ID = process.env.OWNER_ID;
