@@ -1,6 +1,4 @@
-const TelegramBot = require('node-telegram-bot-api');
-bot.setMyCommands([
-  { command: 'game', description: 'Играть в Камень-Ножницы-Бумага' },
+const TelegramBot = require('node-telegram-bot-api'); { command: 'game', description: 'Играть в Камень-Ножницы-Бумага' },
   { command: 'compliment', description: 'Получить комплимент' },
   { command: 'roast', description: 'Получить подкол' },
   { command: 'fortune', description: 'Гадание на имени (напиши имя после команды)' },
@@ -26,9 +24,9 @@ bot.onText(/\/help/, (msg) => {
 — "fuck you"
 
 👑 Только для владельца:
-/online, /offline, /status, /setmessage текст`
-  );
-});
+/online, /offline, /status, /setmess
+bot.setMyCommands([
+ 
 
 const TOKEN = process.env.BOT_TOKEN;
 const OWNER_ID = process.env.OWNER_ID;
