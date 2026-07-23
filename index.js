@@ -1,8 +1,9 @@
 const TelegramBot = require("node-telegram-bot-api");
 
 const TOKEN = "8764546807:AAHiOHypjE8hw9e1jqu2ulbYCRYvO29C_jY";
-const OWNER_ID = "8347896030"
-  if (!TOKEN) {
+const OWNER_ID = "8347896030";
+
+if (!TOKEN) {
   throw new Error("Не указан BOT_TOKEN в переменных окружения");
 }
 
