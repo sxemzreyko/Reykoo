@@ -1,4 +1,34 @@
 const TelegramBot = require('node-telegram-bot-api');
+bot.setMyCommands([
+  { command: 'game', description: 'Играть в Камень-Ножницы-Бумага' },
+  { command: 'compliment', description: 'Получить комплимент' },
+  { command: 'roast', description: 'Получить подкол' },
+  { command: 'fortune', description: 'Гадание на имени (напиши имя после команды)' },
+  { command: 'help', description: 'Список всех команд и слов-триггеров' },
+  { command: 'status', description: 'Статус бота (только для владельца)' },
+  { command: 'online', description: 'Включить режим на связи (только для владельца)' },
+  { command: 'offline', description: 'Включить авто-ответ (только для владельца)' }
+]);
+
+bot.onText(/\/help/, (msg) => {
+  bot.sendMessage(msg.chat.id,
+`📋 Что умеет этот бот:
+
+🎮 /game — Камень-Ножницы-Бумага
+💬 /compliment — случайный комплимент
+😏 /roast — случайный подкол
+🔮 /fortune Имя — гадание на имени
+
+✨ Слова-триггеры (просто напиши):
+— "зио котча"
+— "любовь"
+— "спокойной ночи"
+— "fuck you"
+
+👑 Только для владельца:
+/online, /offline, /status, /setmessage текст`
+  );
+});
 
 const TOKEN = process.env.BOT_TOKEN;
 const OWNER_ID = process.env.OWNER_ID;
